@@ -210,7 +210,7 @@ export const MessageAggregator = ({
                           minWidth: 0,
                         }}
                       />
-                      
+
                       <ActionButton
                         square
                         ghost

@@ -12,14 +12,20 @@ import LinkSpan from './LinkSpan';
 import UserMention from '../mentions/UserMention';
 import TimestampElement from './TimestampElement';
 
-const InlineElements = ({ contents }) =>
+const InlineElements = ({ contents, searchText }) =>
   contents.map((content, index) => {
     switch (content.type) {
       case 'BOLD':
         return <BoldSpan key={index} contents={content.value} />;
 
       case 'PLAIN_TEXT':
-        return <PlainSpan key={index} contents={content.value} />;
+        return (
+          <PlainSpan
+            key={index}
+            contents={content.value}
+            searchText={searchText}
+          />
+        );
 
       case 'STRIKE':
         return <StrikeSpan key={index} contents={content.value} />;
@@ -67,4 +73,5 @@ export default InlineElements;
 
 InlineElements.propTypes = {
   contents: PropTypes.any,
+  searchText: PropTypes.string,
 };

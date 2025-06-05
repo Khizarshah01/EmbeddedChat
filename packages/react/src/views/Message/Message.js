@@ -287,7 +287,12 @@ const Message = ({
                     />
                   </>
                 ) : (
-                  <Markdown body={message} md={message.md} isReaction={false}  searchText={searchText || ''} />
+                  <Markdown
+                    body={message}
+                    md={message.md}
+                    isReaction={false}
+                    searchText={searchText || ''}
+                  />
                 )}
 
                 {message.blocks && (
