@@ -41,6 +41,7 @@ const Message = ({
   showRoles = true,
   isLinkPreview = true,
   isInSidebar = false,
+  searchText = '',
 }) => {
   const { classNames, styleOverrides, variantOverrides } =
     useComponentOverrides(
@@ -277,6 +278,7 @@ const Message = ({
                       body={message}
                       md={message.md}
                       isReaction={false}
+                      searchText={searchText || ''}
                     />
                     <Attachments
                       attachments={message.attachments}
@@ -285,7 +287,7 @@ const Message = ({
                     />
                   </>
                 ) : (
-                  <Markdown body={message} md={message.md} isReaction={false} />
+                  <Markdown body={message} md={message.md} isReaction={false}  searchText={searchText || ''} />
                 )}
 
                 {message.blocks && (
@@ -385,6 +387,7 @@ Message.propTypes = {
   newDay: PropTypes.bool,
   type: PropTypes.oneOf(['thread', 'default']),
   showAvatar: PropTypes.bool,
+  searchText: PropTypes.string,
 };
 
 export default memo(Message);

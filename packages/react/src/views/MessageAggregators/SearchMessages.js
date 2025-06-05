@@ -49,6 +49,7 @@ const SearchMessages = () => {
         isSearch: true,
         handleInputChange,
         placeholder: 'Search Messages',
+        searchText: text,
       }}
       searchFiltered={messageList}
       shouldRender={(msg) => !!msg}

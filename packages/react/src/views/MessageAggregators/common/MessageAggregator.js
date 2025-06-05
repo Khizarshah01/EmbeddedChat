@@ -201,6 +201,7 @@ export const MessageAggregator = ({
                         showAvatar
                         showToolbox={false}
                         showRoles={showRoles}
+                        searchText={searchProps?.searchText || ''}
                         isInSidebar
                         style={{
                           flex: 1,
@@ -209,7 +210,7 @@ export const MessageAggregator = ({
                           minWidth: 0,
                         }}
                       />
-
+                      
                       <ActionButton
                         square
                         ghost
