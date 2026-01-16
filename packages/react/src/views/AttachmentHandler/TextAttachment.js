@@ -63,10 +63,10 @@ const FileAttachment = ({
             background: ${theme.colors.background};
           `,
           (type ? variantStyles.pinnedContainer : '') ||
-          css`
+            css`
               ${type === 'file'
-              ? `border: 2px solid ${theme.colors.border};`
-              : ''}
+                ? `border: 2px solid ${theme.colors.border};`
+                : ''}
             `,
         ]}
       >
@@ -265,14 +265,14 @@ const FileAttachment = ({
                   (nestedAttachment?.type
                     ? variantStyles.pinnedContainer
                     : '') ||
-                  css`
+                    css`
                       ${!attachment?.type
-                      ? `border: 2px solid ${theme.colors.border};`
-                      : ''}
+                        ? `border: 2px solid ${theme.colors.border};`
+                        : ''}
                     `,
                   css`
                     ${variantStyles.name !== undefined &&
-                      variantStyles.name.includes('bubble')
+                    variantStyles.name.includes('bubble')
                       ? `border-bottom-left-radius: 0.75rem; border-bottom-right-radius: 0.75rem`
                       : ''}
                   `,
