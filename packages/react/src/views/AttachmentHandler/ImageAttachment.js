@@ -46,10 +46,11 @@ const ImageAttachment = ({
             padding: 0.5rem;
           `,
           (type ? variantStyles.pinnedContainer : '') ||
-            css`
+          css`
               ${type === 'file'
-                ? `border: 2px solid ${theme.colors.border};`
-                : ''}
+              ? `border-inline-start: 2px solid ${theme.colors.border};
+                 background: ${theme.colors.primaryForeground};`
+              : ''}
             `,
         ]}
       >
@@ -70,7 +71,7 @@ const ImageAttachment = ({
                 alt="avatar"
                 size="1.2em"
               />
-              <Box>@{authorName}</Box>
+              <Box>{authorName}</Box>
             </Box>
           </>
         ) : (
@@ -121,10 +122,11 @@ const ImageAttachment = ({
                   (nestedAttachment.attachments[0].type
                     ? variantStyles.pinnedContainer
                     : variantStyles.quoteContainer) ||
-                    css`
+                  css`
                       ${nestedAttachment.attachments[0].type === 'file'
-                        ? `border: 2px solid ${theme.colors.border};`
-                        : ''}
+                      ? `border-inline-start: 2px solid ${theme.colors.border};
+                         background: ${theme.colors.primaryForeground};`
+                      : ''}
                     `,
                 ]}
               >
@@ -145,7 +147,7 @@ const ImageAttachment = ({
                         alt="avatar"
                         size="1.2em"
                       />
-                      <Box>@{nestedAttachment.author_name}</Box>
+                      <Box>{nestedAttachment.author_name}</Box>
                     </Box>
                   </>
                 ) : (

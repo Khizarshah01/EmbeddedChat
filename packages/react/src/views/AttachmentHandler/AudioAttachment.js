@@ -37,10 +37,11 @@ const AudioAttachment = ({
             padding: 0.5rem;
           `,
           (type ? variantStyles.pinnedContainer : '') ||
-            css`
+          css`
               ${type === 'file'
-                ? `border: 3px solid ${theme.colors.border};`
-                : ''}
+              ? `border-inline-start: 2px solid ${theme.colors.border};
+                 background: ${theme.colors.primaryForeground};`
+              : ''}
             `,
         ]}
       >
@@ -61,7 +62,7 @@ const AudioAttachment = ({
                 alt="avatar"
                 size="1.2em"
               />
-              <Box>@{authorName}</Box>
+              <Box>{authorName}</Box>
             </Box>
           </>
         ) : (
@@ -104,10 +105,11 @@ const AudioAttachment = ({
                   (nestedAttachment.type
                     ? variantStyles.pinnedContainer
                     : variantStyles.quoteContainer) ||
-                    css`
+                  css`
                       ${nestedAttachment.type === 'file'
-                        ? `border: 3px solid ${theme.colors.border};`
-                        : ''}
+                      ? `border-inline-start: 2px solid ${theme.colors.border};
+                           background: ${theme.colors.primaryForeground};`
+                      : ''}
                     `,
                 ]}
               >
@@ -128,7 +130,7 @@ const AudioAttachment = ({
                         alt="avatar"
                         size="1.2em"
                       />
-                      <Box>@{nestedAttachment.author_name}</Box>
+                      <Box>{nestedAttachment.author_name}</Box>
                     </Box>
                   </>
                 ) : (

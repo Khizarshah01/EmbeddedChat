@@ -57,16 +57,16 @@ const FileAttachment = ({
       <Box
         css={[
           css`
-            border-radius: 4px;
             line-height: 0;
             padding: 0.5rem;
-            background: ${theme.colors.background};
+            background: ${theme.colors.primaryForeground};
+            border-inline-start: 2px solid ${theme.colors.border};
           `,
           (type ? variantStyles.pinnedContainer : '') ||
-            css`
+          css`
               ${type === 'file'
-                ? `border: 2px solid ${theme.colors.border};`
-                : ''}
+              ? `border-inline-start: 3px solid ${theme.colors.border};`
+              : ''}
             `,
         ]}
       >
@@ -86,91 +86,10 @@ const FileAttachment = ({
               alt="avatar"
               size="1.2em"
             />
-            <Box>@{attachment?.author_name}</Box>
+            <Box>{attachment?.author_name}</Box>
           </Box>
         )}
 
-        {!attachment?.text && !attachment?.attachments && (
-          <AttachmentMetadata
-            attachment={attachment}
-            url={host + attachment.title_link}
-            variantStyles={variantStyles}
-            msg={msg}
-            onExpandCollapseClick={toggleExpanded}
-            isExpanded={isExpanded}
-          />
-        )}
-        {isExpanded && (attachment?.title_link || attachment?.text) && (
-          <Box
-            css={css`
-              margin-top: 0.5rem;
-              white-space: pre-line;
-              background: ${theme.colors.background};
-              padding: 8px 12px;
-              border-radius: 4px;
-              border: 1px solid ${theme.colors.border};
-              line-height: normal;
-            `}
-          >
-            {attachment?.text ? (
-              attachment.text[0] === '[' ? (
-                attachment.text.match(/\n(.*)/)?.[1] || ''
-              ) : (
-                <Markdown
-                  body={attachment.text}
-                  md={parse(attachment?.text)}
-                  isReaction={false}
-                />
-              )
-            ) : !attachment.attachments ? (
-              <Box
-                css={css`
-                  display: flex;
-                  align-items: center;
-                  margin-top: 0.5rem;
-                  background: ${theme.colors.background};
-                  padding: 8px 12px;
-                  border-radius: 4px;
-                  gap: 8px;
-                  border: 1px solid ${theme.colors.border};
-                `}
-              >
-                <Icon name="file" size="40px" />
-                <Box
-                  css={css`
-                    display: flex;
-                    flex-direction: column;
-                    gap: 2px;
-                    line-height: normal;
-                  `}
-                >
-                  <a
-                    href={host + attachment.title_link}
-                    download={attachment.title_link_download}
-                    css={css`
-                      text-decoration: none;
-                      font-size: 0.875rem;
-                      &:hover {
-                        text-decoration: underline;
-                      }
-                    `}
-                  >
-                    {attachment.title}
-                  </a>
-                  <Box
-                    css={css`
-                      font-size: 0.75rem;
-                    `}
-                  >
-                    {getFileSizeWithFormat(attachment.size, attachment.format)}
-                  </Box>
-                </Box>
-              </Box>
-            ) : (
-              ''
-            )}
-          </Box>
-        )}
         {attachment?.attachments &&
           Array.isArray(attachment.attachments) &&
           attachment.attachments.map((nestedAttachment, index) => {
@@ -258,21 +177,23 @@ const FileAttachment = ({
                     font-size: 0.875rem;
                     font-weight: 400;
                     word-break: break-word;
-                    border-inline-start: 3px solid ${theme.colors.border};
+                    background: ${theme.colors.primaryForeground};
+                    border-inline-start: 2px solid ${theme.colors.border};
                     margin-top: 0.75rem;
+                    margin-inline-start: 1rem;
                     padding: 0.5rem;
                   `,
                   (nestedAttachment?.type
                     ? variantStyles.pinnedContainer
                     : '') ||
-                    css`
+                  css`
                       ${!attachment?.type
-                        ? `border: 2px solid ${theme.colors.border};`
-                        : ''}
+                      ? `border-inline-start: 2px solid ${theme.colors.border};`
+                      : ''}
                     `,
                   css`
                     ${variantStyles.name !== undefined &&
-                    variantStyles.name.includes('bubble')
+                      variantStyles.name.includes('bubble')
                       ? `border-bottom-left-radius: 0.75rem; border-bottom-right-radius: 0.75rem`
                       : ''}
                   `,
@@ -296,7 +217,7 @@ const FileAttachment = ({
                         alt="avatar"
                         size="1.2em"
                       />
-                      <Box>@{nestedAttachment?.author_name}</Box>
+                      <Box>{nestedAttachment?.author_name}</Box>
                     </>
                   )}
                 </Box>
@@ -334,7 +255,7 @@ const FileAttachment = ({
                           display: flex;
                           align-items: center;
                           margin-top: 0.5rem;
-                          background: ${theme.colors.background};
+                          background: ${theme.colors.primaryForeground};
                           padding: 8px 12px;
                           border-radius: 4px;
                           gap: 8px;
@@ -381,6 +302,86 @@ const FileAttachment = ({
               </Box>
             );
           })}
+
+        {!attachment?.text && !attachment?.attachments && (
+          <AttachmentMetadata
+            attachment={attachment}
+            url={host + attachment.title_link}
+            variantStyles={variantStyles}
+            msg={msg}
+            onExpandCollapseClick={toggleExpanded}
+            isExpanded={isExpanded}
+          />
+        )}
+        {isExpanded && (attachment?.title_link || attachment?.text) && (
+          <Box
+            css={css`
+              margin-top: 0.5rem;
+              white-space: pre-line;
+              background: ${theme.colors.primaryForeground};
+              padding: 8px 12px;
+              line-height: normal;
+            `}
+          >
+            {attachment?.text ? (
+              attachment.text[0] === '[' ? (
+                attachment.text.match(/\n(.*)/)?.[1] || ''
+              ) : (
+                <Markdown
+                  body={attachment.text}
+                  md={parse(attachment?.text)}
+                  isReaction={false}
+                />
+              )
+            ) : !attachment.attachments ? (
+              <Box
+                css={css`
+                  display: flex;
+                  align-items: center;
+                  margin-top: 0.5rem;
+                  background: ${theme.colors.primaryForeground};
+                  padding: 8px 12px;
+                  border-radius: 4px;
+                  gap: 8px;
+                  border: 1px solid ${theme.colors.border};
+                `}
+              >
+                <Icon name="file" size="40px" />
+                <Box
+                  css={css`
+                    display: flex;
+                    flex-direction: column;
+                    gap: 2px;
+                    line-height: normal;
+                  `}
+                >
+                  <a
+                    href={host + attachment.title_link}
+                    download={attachment.title_link_download}
+                    css={css`
+                      text-decoration: none;
+                      font-size: 0.875rem;
+                      &:hover {
+                        text-decoration: underline;
+                      }
+                    `}
+                  >
+                    {attachment.title}
+                  </a>
+                  <Box
+                    css={css`
+                      font-size: 0.75rem;
+                    `}
+                  >
+                    {getFileSizeWithFormat(attachment.size, attachment.format)}
+                  </Box>
+                </Box>
+              </Box>
+            ) : (
+              ''
+            )}
+          </Box>
+        )}
       </Box>
     </Box>
   );
